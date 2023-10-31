@@ -1,0 +1,32 @@
+{
+    "name": "WEB DOWNLOADER",
+    "version": "1.0",
+    "manifest_version": 3,
+    "options_page": "options.html",
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
+    "permissions": [
+        "pageCapture",
+        "downloads",
+        "offscreen",
+        "storage",
+        "contextMenus"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_title": "hoge"
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+B",
+                "mac": "Command+B"
+            }
+        }
+    }
+}

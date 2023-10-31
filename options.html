@@ -1,0 +1,36 @@
+<!--
+ * @Author: joe 
+ * @Date: 2023-10-31 11:17:28
+ * @LastEditTime: 2023-10-31 17:20:17
+ * @LastEditors: joe 
+ * @Description: 
+ * @FilePath: \single\options.html
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Configurations</title>
+</head>
+
+<body>
+    <label> Conflication action for filename :
+        <select id="conflict">
+            <option value="overwrite">Overwrite</option>
+            <option value="uniquify">Uniquify</option>
+            <option value="prompt">Prompt</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        Filename :
+        <input type="text" id="filename" name="filename" value="web.html"><br><br>
+    </label>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script type="module" src="options.js"></script>
+</body>
+
+</html>
