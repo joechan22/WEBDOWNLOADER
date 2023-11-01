@@ -36,10 +36,7 @@ async function setupOffscreenDocument(path) {
     }
 }
 
-chrome.action.onClicked.addListener(async () => {
-
-    await setupOffscreenDocument(offscreenPath);
-
+function downloadHTML() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.pageCapture.saveAsMHTML({ tabId: tabs[0].id }, async (md) => {
             const mdText = await md.text();
@@ -53,11 +50,41 @@ chrome.action.onClicked.addListener(async () => {
             });
         });
     });
+}
+
+chrome.action.onClicked.addListener(async () => {
+
+    await setupOffscreenDocument(offscreenPath);
+
+    downloadHTML();
+});
+
+chrome.runtime.onInstalled.addListener(function () {
+    let parent = chrome.contextMenus.create({
+        title: 'WEB DOWNLOADER',
+        id: 'parent'
+    });
+    chrome.contextMenus.create({
+        title: 'download',
+        parentId: parent,
+        id: 'child1'
+    });
 });
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     loadSettings((res) => { updateSetting(res); });
 });
+
+// callback function for the context manu
+chrome.contextMenus.onClicked.addListener(actioncOnClick);
+
+async function actioncOnClick(info) {
+    switch (info.type) {
+        default:
+            await setupOffscreenDocument(offscreenPath);
+            downloadHTML();
+    }
+}
 
 function updateSetting(s) {
     settings = s;
